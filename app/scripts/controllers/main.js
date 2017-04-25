@@ -11,10 +11,8 @@ angular.module('perfectPlaceApp')
     .controller('MainCtrl', function ($scope, $location) {
 
         this.getLocation = function () {
-            // console.log($location.path());
             return $location.path();
 
         };
 
-        // $scope.getLocation();
     });

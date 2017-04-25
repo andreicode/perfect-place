@@ -79,7 +79,7 @@
 
 
                 <span ng-if="main.getLocation() === '/map'">
-                    <md-input-container hide-xs style="padding-top:20px" flex>
+                    <md-input-container hide-xs class="search-container" flex>
                         <label>&nbsp;</label>
                         <input ng-model="search.who" placeholder="Search">
                     </md-input-container>
@@ -90,7 +90,7 @@
                 </span>
 
                 <span ng-if="main.getLocation() === '/listings'">
-                    <md-input-container hide-xs style="padding-top:20px" class="md-icon-float" flex>
+                    <md-input-container hide-xs class="search-container" flex>
                         <label>&nbsp;</label>
                         <input ng-model="search.who" placeholder="Search">
                     </md-input-container>
@@ -131,7 +131,7 @@
                 </span>
 
                 <span ng-if="main.getLocation() === '/my-listings'">
-                    <md-input-container hide-xs style="padding-top:20px" class="md-icon-float" flex>
+                    <md-input-container hide-xs class="search-container" flex>
                         <label>&nbsp;</label>
                         <input ng-model="search.who" placeholder="Search">
                     </md-input-container>
@@ -172,7 +172,7 @@
                 </span>
 
                 <span ng-if="main.getLocation() === '/bookmarks'">
-                    <md-input-container hide-xs style="padding-top:20px" class="md-icon-float" flex>
+                    <md-input-container hide-xs class="search-container" flex>
                         <label>&nbsp;</label>
                         <input ng-model="search.who" placeholder="Search">
                     </md-input-container>
@@ -214,9 +214,9 @@
             </div>
         </md-toolbar>
 
-        <md-content style="overflow:hidden;background-color: #eee;" flex layout-padding>
+        <md-content class="main-content-layout" flex layout-padding>
 
-            <div style="height:100%; overflow-y:auto;" ng-view layout-padding>
+            <div class="ng-view-layout" ng-view layout-padding>
             </div>
 
         </md-content>
