@@ -79,3 +79,7 @@ body {
     background-color: #626eaf;
 
 }
+
+.nofocus:focus {
+    outline: none;
+}
