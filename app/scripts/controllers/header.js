@@ -16,6 +16,13 @@ angular.module('perfectPlaceApp')
 
         };
 
+
+        $scope.toggleMapFilters = function () {
+
+            $mdSidenav('right').toggle();
+
+        };
+
         $scope.openAdvancedFilters = function () {
 
             
