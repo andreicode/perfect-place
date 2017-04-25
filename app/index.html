@@ -74,13 +74,107 @@
                 <h2 md-truncate>{{getHeaderByLocation()}}</h2>
                 <div flex></div>
 
+
+
+                <span ng-if="main.getLocation() === '/map'">
+                    <md-input-container hide-xs style="padding-top:20px" flex>
+                        <label>&nbsp;</label>
+                        <input ng-model="search.who" placeholder="Search">
+                    </md-input-container>
+
+                    <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleMapFilters()">
+                        <i class="fa fa-map-o" aria-hidden="true"></i>
+                    </md-button>
+                </span>
+
                 <span ng-if="main.getLocation() === '/listings'">
                     <md-input-container style="padding-top:20px" class="md-icon-float" flex>
                         <label>&nbsp;</label>
                         <input ng-model="search.who" placeholder="Search">
                     </md-input-container>
 
-                    <!--<i class="fa fa-search" aria-hidden="true"></i>-->
+
+                    <md-menu>
+                        <md-button aria-label="Open filters menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                           <i class="fa fa-sliders" aria-hidden="true"></i>
+                        </md-button>
+                        <md-menu-content width="3">
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by popularity
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by price ascending
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by price descending
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by price descending
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="openAdvancedFilters()">
+                                    Advanced
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </span>
+
+                <span ng-if="main.getLocation() === '/my-listings'">
+                    <md-input-container style="padding-top:20px" class="md-icon-float" flex>
+                        <label>&nbsp;</label>
+                        <input ng-model="search.who" placeholder="Search">
+                    </md-input-container>
+
+
+                    <md-menu>
+                        <md-button aria-label="Open filters menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                           <i class="fa fa-sliders" aria-hidden="true"></i>
+                        </md-button>
+                        <md-menu-content width="3">
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by popularity
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by price ascending
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by price descending
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by price descending
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="openAdvancedFilters()">
+                                    Advanced
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </span>
+
+                <span ng-if="main.getLocation() === '/bookmarks'">
+                    <md-input-container style="padding-top:20px" class="md-icon-float" flex>
+                        <label>&nbsp;</label>
+                        <input ng-model="search.who" placeholder="Search">
+                    </md-input-container>
+
 
                     <md-menu>
                         <md-button aria-label="Open filters menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
@@ -118,9 +212,9 @@
             </div>
         </md-toolbar>
 
-        <md-content style="overflow:hidden;" flex layout-padding>
+        <md-content style="overflow:hidden;background-color: #eee;" flex layout-padding>
 
-            <div style="height:100%; overflow-y:scroll; background-color: #eee;" ng-view layout-padding>
+            <div style="height:100%; overflow-y:auto;" ng-view layout-padding>
             </div>
 
         </md-content>
