@@ -16,9 +16,10 @@ angular
         'ngRoute',
         'ngSanitize',
         'ngMaterial',
-        'ngMap'
+        'ngMap',
+        'satellizer'
     ])
-    .config(function ($routeProvider) {
+    .config(function ($routeProvider, $authProvider) {
         $routeProvider
             .when('/login', {
                 templateUrl: 'views/login.html',
@@ -64,5 +65,9 @@ angular
             })
             .otherwise({
                 redirectTo: '/map'
+            });
+
+            $authProvider.facebook({
+                clientId: 'Facebook App ID'
             });
     });

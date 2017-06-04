@@ -8,10 +8,10 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('LoginCtrl', function () {
-        this.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
+    .controller('LoginCtrl', function ($auth) {
+
+
+        $scope.authenticate = function(provider) {
+            $auth.authenticate(provider);
+        };
     });
