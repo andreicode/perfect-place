@@ -1,0 +1,37 @@
+<md-content class="md-whiteframe-5dp account-content" layout-padding>
+    <h3> Personal information </h3>
+    <br>
+
+    <md-input-container class="md-block">
+        <label>Name</label>
+        <input type="text" ng-required="true" value="Lucy Lu">
+    </md-input-container>
+
+    <md-input-container class="md-block">
+        <input type="text" placeholder="Phone Number" ng-required="true" value="0237231333">
+    </md-input-container>
+
+    <md-input-container class="md-block">
+        <input type="email" placeholder="Email" ng-required="true" value="lucy.lu@gmail.com">
+    </md-input-container>
+
+    <md-input-container class="md-block">
+        <input type="text" placeholder="Address" value="UK, London, Random Street No. 5">
+    </md-input-container>
+
+    <h3> Notifications settings </h3>
+    <md-switch ng-model="data.cb3" aria-label="Email newsletter">
+        Email newsletter
+    </md-switch>
+    <md-switch ng-model="data.cb2" aria-label="In app notifications">
+        In app notifications
+    </md-switch>
+    <md-switch ng-model="data.cb4" aria-label="Email notifications">
+        Email notifications
+    </md-switch>
+    <div layout layout-align="end">
+        <md-button class="md-primary">Save</md-button>
+        <md-button class="md-primary">Change Password</md-button>
+    </div>
+
+</md-content>

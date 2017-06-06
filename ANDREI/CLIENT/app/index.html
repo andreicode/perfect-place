@@ -1,0 +1,269 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx7V5B7aad4DJJArvDoZfG5i7AEmyle1w" type="text/javascript"></script>-->
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+</head>
+
+<body ng-app="perfectPlaceApp" ng-cloak layout="row" ng-controller="MainCtrl as main">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+
+
+
+    <md-sidenav ng-if="main.getLocation() !== '/login' && main.getLocation() !== '/register'" class="md-sidenav-left main-sidenav"
+        md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
+        <span ng-controller="NavCtrl">
+            <md-toolbar>
+                <img class="logo-image nofocus" src="images/logo10.svg" ng-click="closeSidenav()">
+            </md-toolbar>
+            <md-content class="sidenav-content" >
+                <md-list no-padding>
+                    <md-list-item ng-click="closeSidenav()" ng-class="main.getLocation() === '/map' ? 'menu-active' : ' '" ng-href="#!/map">
+                        Find the perfect place
+                    </md-list-item>
+                    <md-list-item ng-click="closeSidenav()" ng-class="main.getLocation() === '/listings' ? 'menu-active' : ' '" ng-href="#!/listings">
+                        Browse Listings
+                    </md-list-item>
+                    <md-list-item ng-click="closeSidenav()" ng-class="main.getLocation() === '/my-listings' ? 'menu-active' : ' '" ng-href="#!/my-listings">
+                        My listings
+                    </md-list-item>
+                    <md-list-item ng-click="closeSidenav()" ng-class="main.getLocation() === '/bookmarks' ? 'menu-active' : ' '" ng-href="#!/bookmarks">
+                        Bookmarks
+                    </md-list-item>
+                    <md-list-item ng-click="closeSidenav()" ng-class="main.getLocation() === '/account' ? 'menu-active' : ' '" ng-href="#!/account">
+                        Account
+                    </md-list-item>
+                    <md-list-item ng-click="closeSidenav()" ng-class="main.getLocation() === '/contact' ? 'menu-active' : ' '" ng-href="#!/contact">
+                        Contact
+                    </md-list-item>
+                    <md-list-item ng-click="closeSidenav()">
+                        Logout
+                    </md-list-item>
+                </md-list>
+
+
+            </md-content>
+        </span>
+
+    </md-sidenav>
+
+    <div layout="column" role="main" flex class="layout-column flex">
+
+        <md-toolbar class="md-whiteframe-5dp main-toolbar" ng-if="main.getLocation() !== '/login' && main.getLocation() !== '/register'"
+            ng-controller="HeaderCtrl">
+            <div class="md-toolbar-tools">
+                <md-button hide-gt-md class="md-icon-button" aria-label="Menu" ng-click="toggleMenu()">
+                    <i class="fa fa-bars"></i>
+                </md-button>
+                <h2 md-truncate>{{getHeaderByLocation()}}</h2>
+                <div flex></div>
+
+
+
+                <span ng-if="main.getLocation() === '/map'">
+                    <md-input-container hide-xs class="search-container" flex>
+                        <label>&nbsp;</label>
+                        <input ng-model="search.who" placeholder="Search">
+                    </md-input-container>
+
+                    <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleMapFilters()">
+                        <i class="fa fa-map-o" aria-hidden="true"></i>
+                    </md-button>
+                </span>
+
+                <span ng-if="main.getLocation() === '/listings'">
+                    <md-input-container hide-xs class="search-container" flex>
+                        <label>&nbsp;</label>
+                        <input ng-model="search.who" placeholder="Search">
+                    </md-input-container>
+
+
+                    <md-menu>
+                        <md-button aria-label="Open filters menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                           <i class="fa fa-sliders" aria-hidden="true"></i>
+                        </md-button>
+                        <md-menu-content width="3">
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by popularity
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by price ascending
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by price descending
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by price descending
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="openAdvancedFilters()">
+                                    Advanced
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </span>
+
+                <span ng-if="main.getLocation() === '/my-listings'">
+                    <md-input-container hide-xs class="search-container" flex>
+                        <label>&nbsp;</label>
+                        <input ng-model="search.who" placeholder="Search">
+                    </md-input-container>
+
+
+                    <md-menu>
+                        <md-button aria-label="Open filters menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                           <i class="fa fa-sliders" aria-hidden="true"></i>
+                        </md-button>
+                        <md-menu-content width="3">
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by popularity
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by price ascending
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by price descending
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by price descending
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="openAdvancedFilters()">
+                                    Advanced
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </span>
+
+                <span ng-if="main.getLocation() === '/bookmarks'">
+                    <md-input-container hide-xs class="search-container" flex>
+                        <label>&nbsp;</label>
+                        <input ng-model="search.who" placeholder="Search">
+                    </md-input-container>
+
+
+                    <md-menu>
+                        <md-button aria-label="Open filters menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                           <i class="fa fa-sliders" aria-hidden="true"></i>
+                        </md-button>
+                        <md-menu-content width="3">
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by popularity
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by price ascending
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by price descending
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="null">
+                                    Sort by price descending
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="openAdvancedFilters()">
+                                    Advanced
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </span>
+            </div>
+        </md-toolbar>
+
+        <md-content class="main-content-layout" flex layout-padding>
+
+            <div class="ng-view-layout" ng-view layout-padding>
+            </div>
+
+        </md-content>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
+    <script src="bower_components/satellizer/dist/satellizer.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/nav.js"></script>
+    <script src="scripts/controllers/filter.js"></script>
+    <script src="scripts/controllers/header.js"></script>
+    <script src="scripts/controllers/map.js"></script>
+    <script src="scripts/controllers/listings.js"></script>
+    <script src="scripts/controllers/my-listings.js"></script>
+    <script src="scripts/controllers/bookmarks.js"></script>
+    <script src="scripts/controllers/account.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/contact.js"></script>
+    <script src="scripts/controllers/register.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>
