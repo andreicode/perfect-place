@@ -8,8 +8,9 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('LoginCtrl', function ($auth) {
+    .controller('LoginCtrl', function ($auth, $scope) {
 
+        
 
         $scope.authenticate = function(provider) {
             $auth.authenticate(provider);

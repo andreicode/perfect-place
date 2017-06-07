@@ -68,6 +68,8 @@ angular
             });
 
             $authProvider.facebook({
-                clientId: 'Facebook App ID'
+                clientId: '752540668240093',
+                url: 'http://localhost:3000/login/facebook',
+                redirectUri: 'http://localhost:9000/'
             });
     });
