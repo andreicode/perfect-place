@@ -33,7 +33,7 @@ angular.module('perfectPlaceApp')
 
             if ($location.path() === '/map') {
 
-                return 'Find the perfect place';
+                return 'Find your perfect place';
 
             } else if ($location.path() === '/listings') {
 
