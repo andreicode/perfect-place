@@ -28,41 +28,9 @@
 
 
 
-    <md-sidenav ng-if="main.getLocation() !== '/login' && main.getLocation() !== '/register'" class="md-sidenav-left main-sidenav"
+    <md-sidenav class="md-sidenav-left main-sidenav"
         md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
-        <span ng-controller="NavCtrl">
-            <md-toolbar>
-                <img class="logo-image nofocus" src="images/logo10.svg" ng-click="closeSidenav()">
-            </md-toolbar>
-            <md-content class="sidenav-content" >
-                <md-list no-padding>
-                    <md-list-item ng-click="closeSidenav()" ng-class="main.getLocation() === '/map' ? 'menu-active' : ' '" ng-href="#!/map">
-                        Find the perfect place
-                    </md-list-item>
-                    <md-list-item ng-click="closeSidenav()" ng-class="main.getLocation() === '/listings' ? 'menu-active' : ' '" ng-href="#!/listings">
-                        Browse Listings
-                    </md-list-item>
-                    <md-list-item ng-click="closeSidenav()" ng-class="main.getLocation() === '/my-listings' ? 'menu-active' : ' '" ng-href="#!/my-listings">
-                        My listings
-                    </md-list-item>
-                    <md-list-item ng-click="closeSidenav()" ng-class="main.getLocation() === '/bookmarks' ? 'menu-active' : ' '" ng-href="#!/bookmarks">
-                        Bookmarks
-                    </md-list-item>
-                    <md-list-item ng-click="closeSidenav()" ng-class="main.getLocation() === '/account' ? 'menu-active' : ' '" ng-href="#!/account">
-                        Account
-                    </md-list-item>
-                    <md-list-item ng-click="closeSidenav()" ng-class="main.getLocation() === '/contact' ? 'menu-active' : ' '" ng-href="#!/contact">
-                        Contact
-                    </md-list-item>
-                    <md-list-item ng-click="closeSidenav()">
-                        Logout
-                    </md-list-item>
-                </md-list>
-
-
-            </md-content>
-        </span>
-
+        <span ng-controller="NavCtrl" ng-include src="'views/menu-left.html'"></span>
     </md-sidenav>
 
     <div layout="column" role="main" flex class="layout-column flex">
