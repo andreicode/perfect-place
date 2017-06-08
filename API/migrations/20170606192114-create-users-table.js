@@ -19,10 +19,13 @@ module.exports = {
             'created_at': {
                 type: Sequelize.DATE
             },
-           'updated_at': {
+            'updated_at': {
                 type: Sequelize.DATE
             },
             name: {
+                type: Sequelize.STRING
+            },
+            'social_id': {
                 type: Sequelize.STRING
             }
 
