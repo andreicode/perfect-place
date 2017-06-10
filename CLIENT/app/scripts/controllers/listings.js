@@ -8,10 +8,15 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('ListingsCtrl', function () {
-        this.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
+    .controller('ListingsCtrl', function ($scope, listings) {
+
+        $scope.listings = [];
+
+        listings.getAll().then(function (response) {
+
+            $scope.listings = response.data.listings;
+            console.log($scope.listings);
+
+        });
+
     });

@@ -10,16 +10,16 @@
 angular.module('perfectPlaceApp')
     .service('user', function (API_URL, $auth, $http) {
 
-        const getUser = $http.get(API_URL + 'user');
+        // const getUser = $http.get(API_URL + 'user');
         let _user = {};
 
         if ($auth.isAuthenticated()) {
 
-            getUser.then(function (response) {
+            // getUser.then(function (response) {
 
-                _user = response.data.user;
+            //     _user = response.data.user;
 
-            });
+            // });
 
         }
 
@@ -28,7 +28,7 @@ angular.module('perfectPlaceApp')
 
             refresh: function () {
 
-                getUser();
+                // getUser();
 
             },
 
