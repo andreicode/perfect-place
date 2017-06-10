@@ -29,10 +29,13 @@ $factory->define(App\Listing::class, function (Faker\Generator $faker) {
 
         'title' => $faker->catchPhrase(),
         'description' => $faker->realText(600),
+        'address' => $faker->address(),
+        'roomNumber' => $faker->numberBetween($min = 1, $max = 10),
         'lat' => $faker->latitude($min = 51.337815, $max = 51.677150),
         'long' => $faker->longitude($min = -0.440848, $max = 0.124948),
         'price' => $faker->randomNumber($nbDigits = 5),
-        'created_at' => $faker->dateTimeThisYear()
+        'created_at' => $faker->dateTimeThisYear(),
+        'image' => $faker->imageUrl(1600, 900, 'city')
         
     ];
 });

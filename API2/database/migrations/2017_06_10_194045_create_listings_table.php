@@ -17,10 +17,13 @@ class CreateListingsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('description', 1000);
+            $table->string('address', 250);
+            $table->integer('roomNumber');
             $table->double('lat');
             $table->double('long');
             $table->integer('user_id')->references('id')->on('users');
             $table->integer('price');
+            $table->string('image');
             $table->timestamps();
         });
     }
