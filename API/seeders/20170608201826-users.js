@@ -22,10 +22,12 @@ module.exports = {
 
       users.push({
 
-        name: 'Test',
-        created_at: Date.now(),
-        updated_at: Date.now(),
-        social_id: '1234'
+        name: faker.name.findName(),
+        createdAt: faker.date.past(1),
+        updatedAt: faker.date.recent(),
+        email: faker.internet.email(),
+        social_id: faker.random.alphaNumeric(60),
+        avatar: faker.image.avatar()
 
       });
 
@@ -33,7 +35,7 @@ module.exports = {
 
 
 
-    return queryInterface.bulkInsert('users', users, {});
+    return queryInterface.bulkInsert('Users', users, {});
   },
 
   down: function (queryInterface, Sequelize) {
@@ -45,6 +47,6 @@ module.exports = {
       return queryInterface.bulkDelete('Person', null, {});
     */
 
-    return queryInterface.bulkDelete('users', null, {});
+    return queryInterface.bulkDelete('Users', null, {});
   }
 };
