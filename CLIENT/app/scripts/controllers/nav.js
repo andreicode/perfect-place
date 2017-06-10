@@ -8,7 +8,7 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('NavCtrl', function ($auth, $scope, $mdSidenav, $mdDialog) {
+    .controller('NavCtrl', function ($auth, $scope, $mdSidenav, $mdDialog, user) {
 
         $scope.closeSidenav = function () {
             $mdSidenav('left').close();

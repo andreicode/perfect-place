@@ -9,7 +9,7 @@
         <md-list-item ng-click="closeSidenav($event)" ng-class="main.getLocation() === '/listings' ? 'menu-active' : ' '" ng-href="#!/listings">
             Browse Listings
         </md-list-item>
-        <md-list-item ng-click="openLogin()">
+        <md-list-item ng-if="!isAuthenticated()" ng-click="openLogin()">
             Login
         </md-list-item>
         <md-list-item ng-if="isAuthenticated()" ng-click="closeSidenav()" ng-class="main.getLocation() === '/my-listings' ? 'menu-active' : ' '"

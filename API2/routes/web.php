@@ -20,3 +20,9 @@ Route::group(['prefix' => 'login'], function () {
     Route::post('facebook', 'LoginController@facebook');
 
 });
+
+Route::group(['prefix' => 'user'], function () {
+
+    Route::get('/', 'UserController@user');
+
+});

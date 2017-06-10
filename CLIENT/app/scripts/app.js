@@ -19,7 +19,8 @@ angular
         'ngMap',
         'satellizer'
     ])
-    .config(function ($routeProvider, $authProvider) {
+    .constant('API_URL', 'http://localhost:8000/')
+    .config(function (API_URL, $routeProvider, $authProvider) {
         $routeProvider
             .when('/login', {
                 templateUrl: 'views/login.html',
@@ -67,9 +68,9 @@ angular
                 redirectTo: '/map'
             });
 
-            $authProvider.facebook({
-                clientId: '752540668240093',
-                url: 'http://localhost:3000/login/facebook',
-                redirectUri: 'http://localhost:9000/'
-            });
+        $authProvider.facebook({
+            clientId: '752540668240093',
+            url: API_URL + 'login/facebook',
+            redirectUri: 'http://localhost:9000/'
+        });
     });
