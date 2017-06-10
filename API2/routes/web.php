@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'login'], function () {
+
+    Route::post('facebook', 'LoginController@facebook');
+
+});
