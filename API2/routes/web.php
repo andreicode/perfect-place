@@ -28,3 +28,8 @@ Route::group(['prefix' => 'listing'], function () {
 
 });
 
+Route::group(['prefix' => 'user'], function () {
+
+    Route::get('/', 'UserController@user');
+
+});

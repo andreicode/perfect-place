@@ -8,11 +8,16 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('LoginCtrl', function ($auth, $scope) {
+    .controller('LoginCtrl', function ($auth, $scope, user) {
 
-        
 
-        $scope.authenticate = function(provider) {
-            $auth.authenticate(provider);
+
+        $scope.authenticate = function (provider) {
+            $auth.authenticate(provider)
+                .then(function (r) {
+
+                    user.refresh();
+
+                });
         };
     });
