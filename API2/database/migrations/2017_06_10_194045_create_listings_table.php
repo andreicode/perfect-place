@@ -17,6 +17,8 @@ class CreateListingsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('description', 1000);
+            $table->boolean('rental');
+            $table->string('phone');
             $table->string('address', 250);
             $table->integer('roomNumber');
             $table->double('lat');

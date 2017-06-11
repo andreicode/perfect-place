@@ -29,6 +29,8 @@ $factory->define(App\Listing::class, function (Faker\Generator $faker) {
 
         'title' => $faker->catchPhrase(),
         'description' => $faker->realText(600),
+        'rental' => $faker->boolean($chanceOfGettingTrue = 70),
+        'phone' => $faker->tollFreePhoneNumber(),
         'address' => $faker->address(),
         'roomNumber' => $faker->numberBetween($min = 1, $max = 10),
         'lat' => $faker->latitude($min = 51.337815, $max = 51.677150),

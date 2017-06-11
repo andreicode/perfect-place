@@ -9,6 +9,9 @@
             <md-card-title>
                 <md-card-title-text>
                     <span class="md-headline">{{listing.title}}</span>
+                    <span ng-if="listing.rental === 0" class="md-subhead"><i class="fa fa-usd" aria-hidden="true"></i> For sale</span>
+                    <span ng-if="listing.rental === 1" class="md-subhead"><i class="fa fa-home" aria-hidden="true"></i> For rent</span>
+
                 </md-card-title-text>
             </md-card-title>
 
@@ -34,6 +37,8 @@
             <md-card-title>
                 <md-card-title-text>
                     <span class="md-headline">{{listing.title}}</span>
+                    <span ng-if="listing.rental === 0" class="md-subhead"><i class="fa fa-usd" aria-hidden="true"></i> For sale</span>
+                    <span ng-if="listing.rental === 1" class="md-subhead"><i class="fa fa-home" aria-hidden="true"></i> For rent</span>
                 </md-card-title-text>
             </md-card-title>
 
@@ -59,6 +64,8 @@
             <md-card-title>
                 <md-card-title-text>
                     <span class="md-headline">{{listing.title}}</span>
+                    <span ng-if="listing.rental === 0" class="md-subhead"><i class="fa fa-usd" aria-hidden="true"></i> For sale</span>
+                    <span ng-if="listing.rental === 1" class="md-subhead"><i class="fa fa-home" aria-hidden="true"></i> For rent</span>
                 </md-card-title-text>
             </md-card-title>
 
