@@ -8,12 +8,14 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('ListingCtrl', function ($scope, $routeParams, listings, user, NgMap) {
+    .controller('ListingCtrl', function (API_URL, $scope, $http, $location, $routeParams, listings, user, NgMap, $mdDialog) {
 
         $scope.listing = {};
 
         $scope.user = {};
 
+
+        console.log(user.get());
 
         user.get().then(function (response) {
 
@@ -45,6 +47,47 @@ angular.module('perfectPlaceApp')
             })
 
         });
+
+        $scope.editListing = function (ev, listing) {
+
+            $mdDialog.show({
+                controller: 'EditListingCtrl',
+                templateUrl: 'views/edit-listing.html',
+                parent: angular.element(document.body),
+                locals: { listing: listing },
+                targetEvent: ev,
+                clickOutsideToClose: true,
+            })
+                .then(function (response) {
+
+                    $scope.listing = response;
+
+                }, function () {
+
+                });
+        };
+
+        $scope.deleteListing = function (ev, id) {
+
+            var confirm = $mdDialog.confirm()
+                .title('Would you like to delete this listing?')
+                .textContent('This action is permanent.')
+                .ariaLabel('Delete listing')
+                .targetEvent(ev)
+                .ok('Delete')
+                .cancel('Cancel');
+
+            $mdDialog.show(confirm).then(function () {
+
+                $http({ method: 'DELETE', url: API_URL + 'listing/' + id }).then(function (r) { console.log(r) });
+
+                $location.path('/my-listings');
+
+            }, function () {
+
+            });
+
+        }
 
 
     });

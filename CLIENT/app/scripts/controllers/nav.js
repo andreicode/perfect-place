@@ -28,6 +28,8 @@ angular.module('perfectPlaceApp')
                 clickOutsideToClose: true,
             });
 
+
+
         };
 
     });

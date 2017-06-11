@@ -1,10 +1,11 @@
 <md-content class="add-listing">
-    <md-button class="md-fab" aria-label="Add listing" ng-click="showPrompt($event)">
+    <md-button class="md-fab" aria-label="Add listing" ng-click="addListing($event)">
         <i class="fa fa-home"></i>
     </md-button>
 </md-content>
 
-<md-content style="background: none;" class="md-padding" layout-xs="column" layout="row">
+<md-content infinite-scroll="loadMore()" infinite-scroll-distance="0" infinite-scroll-parent="true" style="background: none;"
+    class="md-padding" layout-xs="column" layout="row">
 
     <div flex-xs flex-gt-sm="33" layout="column">
 
@@ -26,9 +27,7 @@
             </md-card-content>
 
             <md-card-actions layout="row" layout-align="end center">
-                <md-button>More details</md-button>
-                <md-button>Edit</md-button>
-                <md-button>Delete</md-button>
+                <md-button ng-click="moreDetails(listing.id)">More details</md-button>
             </md-card-actions>
         </md-card>
 
@@ -54,9 +53,7 @@
             </md-card-content>
 
             <md-card-actions layout="row" layout-align="end center">
-                <md-button>More details</md-button>
-                <md-button>Edit</md-button>
-                <md-button>Delete</md-button>
+                <md-button ng-click="moreDetails(listing.id)">More details</md-button>
             </md-card-actions>
         </md-card>
 
@@ -82,15 +79,13 @@
             </md-card-content>
 
             <md-card-actions layout="row" layout-align="end center">
-                <md-button>More details</md-button>
-                <md-button>Edit</md-button>
-                <md-button>Delete</md-button>
+                <md-button ng-click="moreDetails(listing.id)">More details</md-button>
             </md-card-actions>
         </md-card>
 
     </div>
 
 </md-content>
-<!--<div layout="row" layout-align="space-around">
+<div ng-if="loading" layout="row" layout-align="space-around">
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-</div>-->
+</div>

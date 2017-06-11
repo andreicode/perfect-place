@@ -85,11 +85,25 @@ class ListingController extends Controller
 
     }
 
-    public function my() {
+    public function my(Request $request) {
 
          $user = JWTAuth::parseToken()->toUser();
 
-         $listings = Listing::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
+         $listings = Listing::when($request->has('search'), function ($query) use($request) {
+
+                return $query->where(function ($q) use($request) {
+
+                    return $q->where('title', 'LIKE', '%' . $request->search . '%')
+                        ->orWhere('description', 'LIKE', '%' . $request->search . '%');
+
+                });
+
+            })
+            ->where('user_id', $user->id)
+            ->orderBy($request->has('order') ? $request->order : 'created_at', $request->has('orderType') ? $request->orderType : 'DESC')
+            ->skip($request->has('page') ? $request->page : 0)
+            ->limit($this->pageSize)
+            ->get();
 
          return response()->json(compact('listings'));
 
@@ -112,6 +126,22 @@ class ListingController extends Controller
        }
 
        return response()->json(compact('listing')); 
+
+    }
+
+    public function delete($id) {
+
+        $user = JWTAuth::parseToken()->toUser();
+
+        $listing = Listing::where('id', $id)->where('user_id', $user->id)->first();
+
+        if ($listing) {
+
+            $listing->delete();
+
+        }
+
+        return response()->json('item_deleted');
 
     }
 

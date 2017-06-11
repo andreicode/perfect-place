@@ -8,7 +8,7 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('MapCtrl', function ($scope, $mdSidenav, NgMap, mapService) {
+    .controller('MapCtrl', function ($scope, $mdSidenav, NgMap, mapService, airQuality) {
 
         $scope.openFilters = function () {
 
@@ -19,11 +19,60 @@ angular.module('perfectPlaceApp')
         $scope.filters = {};
         $scope.setFilter = function () { };
 
-        NgMap.getMap().then(function (map) {
+        NgMap.getMap({ id: 'main-map' }).then(function (map) {
 
             var transitLayer = new google.maps.TransitLayer();
             var trafficLayer = new google.maps.TrafficLayer();
             var bikeLayer = new google.maps.BicyclingLayer();
+
+            var airQualityMarkers = [];
+
+
+            function setAQFilter() {
+
+                for (var i = 0; i < airQualityMarkers.length; i++) {
+
+                    airQualityMarkers[i].setMap(map);
+
+                }
+
+            }
+
+            function removeAQFilter() {
+
+                for (var i = 0; i < airQualityMarkers.length; i++) {
+
+                    airQualityMarkers[i].setMap(null);
+
+                }
+
+            }
+
+            airQuality.get().then(function (response) {
+
+                airQualityMarkers = response.data.results.map(function (item) {
+
+                    return new google.maps.Circle({
+
+                        strokeColor: '#006400',
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: '#808000',
+                        fillOpacity: 0.35,
+                        map: null,
+                        center: {
+                            lat: item.coordinates.latitude,
+                            lng: item.coordinates.longitude
+                        },
+                        radius: Math.log2(item.count) * 100
+
+                    });
+
+                });
+
+
+            }, function (err) { console.log(err) });
+
 
             $scope.setFilter = function (filter, value) {
 
@@ -63,6 +112,20 @@ angular.module('perfectPlaceApp')
                         bikeLayer.setMap(null);
 
                     }
+                } else if (filter === 'pollution') {
+
+                    console.log(value);
+
+                    if (value) {
+
+                        setAQFilter();
+
+                    } else {
+
+                        removeAQFilter();
+
+                    }
+
                 }
 
             };
@@ -73,8 +136,6 @@ angular.module('perfectPlaceApp')
             mapService.get().then(function (response) {
 
                 var markerMap = response.data.map;
-
-                console.log(markerMap);
 
                 for (var i = 0; i < markerMap.length; i++) {
 

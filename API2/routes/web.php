@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::group(['prefix' => 'login'], function () {
 
     Route::post('facebook', 'LoginController@facebook');
@@ -30,8 +26,8 @@ Route::group(['prefix' => 'listing'], function () {
 
         Route::get('my', 'ListingController@my');
         Route::post('store', 'ListingController@store');
-        Route::put('{id}', 'ListingController@update');
-        Route::delete('{id}', 'ListingsController@delete');
+        Route::post('update/{id}', 'ListingController@update');
+        Route::delete('{id}', 'ListingController@delete');
 
     });
 

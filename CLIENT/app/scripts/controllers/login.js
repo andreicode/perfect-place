@@ -8,7 +8,7 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('LoginCtrl', function ($auth, $scope, user) {
+    .controller('LoginCtrl', function ($auth, $scope, user, $mdDialog) {
 
 
 
@@ -17,7 +17,9 @@ angular.module('perfectPlaceApp')
                 .then(function (r) {
 
                     user.refresh();
+                    $mdDialog.hide();
 
                 });
         };
+
     });

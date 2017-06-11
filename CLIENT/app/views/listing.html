@@ -52,8 +52,8 @@
             </md-card-content>
 
             <md-card-actions layout="row" layout-align="end center">
-                <md-button ng-if="user.id === listing.user_id">Edit</md-button>
-                <md-button ng-if="user.id === listing.user_id">Delete</md-button>
+                <md-button ng-click="editListing($event, listing)" ng-if="user.id === listing.user_id">Edit</md-button>
+                <md-button ng-click="deleteListing($event, listing.id)" ng-if="user.id === listing.user_id">Delete</md-button>
                 <md-button ng-if="user.id !== listing.user_id">Bookmark</md-button>
             </md-card-actions>
 

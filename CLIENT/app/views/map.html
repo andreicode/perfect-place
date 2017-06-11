@@ -1,5 +1,5 @@
 <div class="main-map-container" map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx7V5B7aad4DJJArvDoZfG5i7AEmyle1w">
-    <ng-map class="main-map" center="[51.5091615,-0.1194603]">
+    <ng-map id="main-map" class="main-map" center="[51.5091615,-0.1194603]">
     </ng-map>
 
 
@@ -17,7 +17,7 @@
                     <md-switch ng-model="filters.bicycle" aria-label="Bicycle Filter" ng-change="setFilter('bike', filters.bicycle)"><i class="fa fa-bicycle" aria-hidden="true"></i> Bicycle</md-switch>
                 </md-list-item>
                 <md-list-item>
-                    <md-switch ng-model="filters.pollution" aria-label="Pollution Filter" ng-change="setFilter('pollution', filters.polution)"><i class="fa fa-trash" aria-hidden="true"></i> Pollution</md-switch>
+                    <md-switch ng-model="filters.pollution" aria-label="Pollution Filter" ng-change="setFilter('pollution', filters.pollution)"><i class="fa fa-trash" aria-hidden="true"></i> Pollution</md-switch>
                 </md-list-item>
                 <md-list-item>
                     <md-switch ng-model="filters.noise" aria-label="Noise Filter" ng-change="setFilter('noise', filters.noise)"><i class="fa fa-volume-up" aria-hidden="true"></i> Noise Pollution</md-switch>

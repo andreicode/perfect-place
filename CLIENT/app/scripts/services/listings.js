@@ -24,9 +24,9 @@ angular.module('perfectPlaceApp')
 
             },
 
-            getMy: function () {
+            getMy: function (filter) {
 
-                return $http.get(API_URL + 'listing/my');
+                return $http({ method: 'GET', url: API_URL + 'listing/my', params: filter });
 
             },
 

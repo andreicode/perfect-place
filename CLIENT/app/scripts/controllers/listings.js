@@ -8,7 +8,7 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('ListingsCtrl', function ($scope, $rootScope, listings) {
+    .controller('ListingsCtrl', function ($scope, $rootScope, listings, $location) {
 
         $scope.loading = true;
 
@@ -87,6 +87,12 @@ angular.module('perfectPlaceApp')
             });
 
         };
+
+        $scope.moreDetails = function (id) {
+
+            $location.path('/listing/' + id);
+
+        }
 
 
     });

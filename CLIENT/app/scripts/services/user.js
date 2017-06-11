@@ -36,17 +36,21 @@ angular.module('perfectPlaceApp')
 
                 if (_user) {
 
-                    return q.resolve(_user);
+                    q.resolve(_user);
+
+                } else {
+
+
+                    getUser().then(function (response) {
+
+                        _user = response.data.user;
+
+                        q.resolve(_user);
+
+                    }, function (err) { console.log(err); });
 
                 }
 
-                getUser().then(function (response) {
-
-                    _user = response.data.user;
-
-                    return q.resolve(_user);
-
-                }, function (err) { console.log(err); });
 
                 return q.promise;
 

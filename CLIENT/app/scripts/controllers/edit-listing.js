@@ -2,40 +2,38 @@
 
 /**
  * @ngdoc function
- * @name perfectPlaceApp.controller:AddListingCtrl
+ * @name perfectPlaceApp.controller:EditListingCtrl
  * @description
- * # AddListingCtrl
+ * # EditListingCtrl
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('AddListingCtrl', function (API_URL, $scope, NgMap, $mdDialog, $http) {
-
+    .controller('EditListingCtrl', function (API_URL, $scope, NgMap, $mdDialog, listing, $http) {
         $scope.file = undefined;
-        $scope.listing = {};
+        $scope.listing = angular.copy(listing);
 
         var marker = undefined;
 
-        NgMap.getMap({ id: 'add-map' }).then(function (map) {
+        // NgMap.getMap({ id: 'edit-map' }).then(function (map) {
 
+        //     // google.maps.event.addListener(map, 'click', function (ev) {
 
-            google.maps.event.addListener(map, 'click', function (ev) {
+        //     //     if (marker) {
 
-                if (marker) {
+        //     //         marker.setMap(null);
 
-                    marker.setMap(null);
+        //     //     }
 
-                }
+        //     //     marker = new google.maps.Marker({
 
-                marker = new google.maps.Marker({
+        //     //         position: ev.latLng,
+        //     //         map: map
 
-                    position: ev.latLng,
-                    map: map
+        //     //     });
 
-                });
+        //     // });
 
-            });
-
-        });
+        // });
 
         $scope.close = function () {
 
@@ -43,11 +41,16 @@ angular.module('perfectPlaceApp')
 
         };
 
-        $scope.addListing = function () {
+        $scope.editListing = function () {
 
             var formData = new FormData();
 
-            formData.append('image', $scope.file[0].lfFile);
+            if ($scope.file.length) {
+
+                formData.append('image', $scope.file[0].lfFile);
+
+            }
+
             formData.append('title', $scope.listing.title);
             formData.append('phone', $scope.listing.phone);
             formData.append('address', $scope.listing.address);
@@ -55,13 +58,10 @@ angular.module('perfectPlaceApp')
             formData.append('price', $scope.listing.price);
             formData.append('roomNumber', $scope.listing.roomNumber);
             formData.append('description', $scope.listing.description);
-            formData.append('lat', marker.position.lat());
-            formData.append('long', marker.position.lng());
 
-            // console.log(marker, formData);
             $http({
                 method: 'POST',
-                url: API_URL + 'listing/store',
+                url: API_URL + 'listing/update/' + $scope.listing.id,
                 data: formData,
                 transformRequest: angular.identity,
                 headers: {
@@ -70,7 +70,7 @@ angular.module('perfectPlaceApp')
             }).then(function (response) {
 
                 console.log(response);
-                $mdDialog.hide();
+                $mdDialog.hide(response.data.listing);
 
             }, function (err) {
 
@@ -83,5 +83,4 @@ angular.module('perfectPlaceApp')
 
 
         };
-
     });
