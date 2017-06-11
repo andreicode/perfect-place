@@ -1,48 +1,64 @@
-<md-content class="md-whiteframe-5dp account-content" layout-padding>
-    <h3> {{listing.title}} </h3>
-    <br>
+<md-content style="background: none;" class="md-padding" layout-xs="column" layout="row">
 
-    <md-container class="listing-container">
-        <label>Description</label>
-        <p>{{listing.description}}</p>
-    </md-container>
-
-    <md-container class="md-block">
-        <label>Number of rooms</label>
-        <p>{{listing.roomNumber}}</p>
-    </md-container>
-
-    <md-container class="md-block">
-        <label>Address</label>
-        <p>{{listing.address}}</p>
-    </md-container>
-
-    <md-container class="md-block">
-        <label>Status</label>
-        <p ng-if="listing.rental === 0" class="md-subhead"><i class="fa fa-usd" aria-hidden="true"></i> For sale</p>
-        <p ng-if="listing.rental === 1" class="md-subhead"><i class="fa fa-home" aria-hidden="true"></i> For rent</p>
-
-    </md-container>
-
-    <md-container class="md-block">
-        <label>Price</label>
-        <p><i class="fa fa-usd" aria-hidden="true"></i> {{listing.price}}</p>
-    </md-container>
-
-    <md-container class="md-block">
-        <label>Phone</label>
-        <p>{{listing.phone}}</p>
-    </md-container>
-
-    <md-container class="md-block">
-        <label>Image</label>
-        <img ng-src="{{listing.image}}">
-    </md-container>
+    <div flex-xs flex-gt-sm="50" layout="column">
 
 
-    <div layout layout-align="end">
-        <md-button class="md-primary">Save</md-button>
-        <md-button class="md-primary">Change Password</md-button>
+
+        <md-card class="md-whiteframe-9dp" layout-padding>
+
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">{{listing.title}}</span>
+                    <span ng-if="listing.rental === 0" class="md-subhead"><i class="fa fa-usd" aria-hidden="true"></i> For sale</span>
+                    <span ng-if="listing.rental === 1" class="md-subhead"><i class="fa fa-home" aria-hidden="true"></i> For rent</span>
+                </md-card-title-text>
+            </md-card-title>
+
+            <img ng-src="{{listing.image}}" class="md-card-image">
+        </md-card>
+
+        <md-card class="md-whiteframe-9dp" layout-padding>
+
+            <div class="main-map-container" map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx7V5B7aad4DJJArvDoZfG5i7AEmyle1w">
+                <ng-map id="single-map" class="main-map" center="[51.5091615,-0.1194603]">
+                </ng-map>
+            </div>
+
+        </md-card>
+
+    </div>
+
+    <div flex-xs flex-gt-sm="50" layout="column">
+
+        <md-card class="md-whiteframe-9dp" layout-padding>
+
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Details</span>
+                </md-card-title-text>
+            </md-card-title>
+
+            <md-card-content>
+                <p>{{ listing.description }}</p>
+                <p><b>Price</b>: {{ listing.price }} $</p>
+                <p><b>Rooms:</b> {{ listing.roomNumber }}</p>
+                <p><b>Address:</b> {{ listing.address }}</p>
+                <p><b>Seller:</b> {{ listing.user.name }}</p>
+                <p><b>Contact(phone):</b> {{ listing.phone }}</p>
+                <div class="md-media-sm card-media">
+                    <img ng-src="{{ listing.user.avatar }}" style="max-width: 100px;" class="md-card-image">
+                </div>
+
+            </md-card-content>
+
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button ng-if="user.id === listing.user_id">Edit</md-button>
+                <md-button ng-if="user.id === listing.user_id">Delete</md-button>
+                <md-button ng-if="user.id !== listing.user_id">Bookmark</md-button>
+            </md-card-actions>
+
+        </md-card>
+
     </div>
 
 </md-content>

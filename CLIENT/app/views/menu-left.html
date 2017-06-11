@@ -9,9 +9,6 @@
         <md-list-item ng-click="closeSidenav($event)" ng-class="main.getLocation() === '/listings' ? 'menu-active' : ' '" ng-href="#!/listings">
             Browse Listings
         </md-list-item>
-        <md-list-item ng-if="!isAuthenticated()" ng-click="openLogin()">
-            Login
-        </md-list-item>
         <md-list-item ng-if="isAuthenticated()" ng-click="closeSidenav()" ng-class="main.getLocation() === '/my-listings' ? 'menu-active' : ' '"
             ng-href="#!/my-listings">
             My listings
@@ -24,12 +21,14 @@
             ng-href="#!/account">
             Account
         </md-list-item>
-        <md-list-item ng-if="isAuthenticated()" ng-click="closeSidenav()" ng-class="main.getLocation() === '/contact' ? 'menu-active' : ' '"
-            ng-href="#!/contact">
+        <md-list-item ng-click="closeSidenav()" ng-class="main.getLocation() === '/contact' ? 'menu-active' : ' '" ng-href="#!/contact">
             Contact
         </md-list-item>
         <md-list-item ng-if="isAuthenticated()" ng-click="closeSidenav()">
             Logout
+        </md-list-item>
+        <md-list-item ng-if="!isAuthenticated()" ng-click="openLogin()">
+            Login
         </md-list-item>
     </md-list>
 

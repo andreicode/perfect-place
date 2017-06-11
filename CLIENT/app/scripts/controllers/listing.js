@@ -8,20 +8,43 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('ListingCtrl', function ($scope, $routeParams, listings) {
+    .controller('ListingCtrl', function ($scope, $routeParams, listings, user, NgMap) {
 
         $scope.listing = {};
 
-        listings.getSingle($routeParams.id).then(function (response) {
+        $scope.user = {};
 
-            $scope.listing = response.data.listing;
-            console.log($scope.listing);
 
-        }, function (err) {
+        user.get().then(function (response) {
 
-            console.log(err);
+            $scope.user = response;
 
-        })
+        });
+
+
+        NgMap.getMap({ id: 'single-map' }).then(function (map) {
+
+
+            listings.getSingle($routeParams.id).then(function (response) {
+
+                $scope.listing = response.data.listing;
+
+                var marker = new google.maps.Marker({
+
+                    position: { lat: $scope.listing.lat, lng: $scope.listing.long },
+                    map: map
+
+                });
+
+                map.setCenter({ lat: $scope.listing.lat, lng: $scope.listing.long });
+
+            }, function (err) {
+
+                console.log(err);
+
+            })
+
+        });
 
 
     });

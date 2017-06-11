@@ -10,12 +10,11 @@
 angular.module('perfectPlaceApp')
     .service('listings', function (API_URL, $http) {
 
-
         return {
 
-            getAll: function () {
+            getAll: function (filter) {
 
-                return $http.get(API_URL + 'listing/all');
+                return $http({ method: 'GET', url: API_URL + 'listing/all', params: filter });
 
             },
 
@@ -29,7 +28,7 @@ angular.module('perfectPlaceApp')
 
                 return $http.get(API_URL + 'listing/my');
 
-            }
+            },
 
         }
 

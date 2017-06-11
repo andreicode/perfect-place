@@ -29,8 +29,7 @@
 
 
 
-    <md-sidenav class="md-sidenav-left main-sidenav"
-        md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
+    <md-sidenav class="md-sidenav-left main-sidenav" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
         <span ng-controller="NavCtrl" ng-include src="'views/menu-left.html'"></span>
     </md-sidenav>
 
@@ -48,11 +47,6 @@
 
 
                 <span ng-if="main.getLocation() === '/map'">
-                    <md-input-container hide-xs class="search-container" flex>
-                        <label>&nbsp;</label>
-                        <input ng-model="search.who" placeholder="Search">
-                    </md-input-container>
-
                     <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleMapFilters()">
                         <i class="fa fa-map-o" aria-hidden="true"></i>
                     </md-button>
@@ -61,7 +55,7 @@
                 <span ng-if="main.getLocation() === '/listings'">
                     <md-input-container hide-xs class="search-container" flex>
                         <label>&nbsp;</label>
-                        <input ng-model="search.who" placeholder="Search">
+                        <input ng-model="search" placeholder="Search" ng-change="setFilter('search', search)">
                     </md-input-container>
 
 
@@ -71,28 +65,22 @@
                         </md-button>
                         <md-menu-content width="3">
                             <md-menu-item>
-                                <md-button ng-click="null">
-                                    Sort by popularity
+                                <md-button ng-click="setFilter('created_at', 'asc')">
+                                    Sort by date ascending
+                                </md-button>
+                            </md-menu-item>
+                                <md-button ng-click="setFilter('created_at', 'desc')">
+                                    Sort by date descending
                                 </md-button>
                             </md-menu-item>
                             <md-menu-item>
-                                <md-button ng-click="null">
+                                <md-button ng-click="setFilter('price', 'asc')">
                                     Sort by price ascending
                                 </md-button>
                             </md-menu-item>
                             <md-menu-item>
-                                <md-button ng-click="null">
+                                <md-button ng-click="setFilter('price', 'desc')">
                                     Sort by price descending
-                                </md-button>
-                            </md-menu-item>
-                            <md-menu-item>
-                                <md-button ng-click="null">
-                                    Sort by price descending
-                                </md-button>
-                            </md-menu-item>
-                            <md-menu-item>
-                                <md-button ng-click="openAdvancedFilters()">
-                                    Advanced
                                 </md-button>
                             </md-menu-item>
                         </md-menu-content>
@@ -216,6 +204,7 @@
     <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
     <script src="bower_components/satellizer/dist/satellizer.js"></script>
     <script src="bower_components/lf-ng-md-file-input/dist/lf-ng-md-file-input.js"></script>
+    <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

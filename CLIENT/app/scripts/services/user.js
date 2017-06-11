@@ -8,33 +8,47 @@
  * Service in the perfectPlaceApp.
  */
 angular.module('perfectPlaceApp')
-    .service('user', function (API_URL, $auth, $http) {
+    .service('user', function (API_URL, $q, $auth, $http) {
 
-        // const getUser = $http.get(API_URL + 'user');
-        let _user = {};
+        var _user = undefined;
 
-        if ($auth.isAuthenticated()) {
+        const getUser = function () {
 
-            // getUser.then(function (response) {
-
-            //     _user = response.data.user;
-
-            // });
+            return $http.get(API_URL + 'user');
 
         }
-
 
         return {
 
             refresh: function () {
 
-                // getUser();
+                getUser().then(function (response) {
+
+                    _user = response.data.user;
+
+                }, function (err) { console.log(err); });
 
             },
 
             get: function () {
 
-                return _user;
+                var q = $q.defer();
+
+                if (_user) {
+
+                    return q.resolve(_user);
+
+                }
+
+                getUser().then(function (response) {
+
+                    _user = response.data.user;
+
+                    return q.resolve(_user);
+
+                }, function (err) { console.log(err); });
+
+                return q.promise;
 
             }
 

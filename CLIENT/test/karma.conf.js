@@ -35,6 +35,7 @@ module.exports = function(config) {
       'bower_components/ngmap/build/scripts/ng-map.js',
       'bower_components/satellizer/dist/satellizer.js',
       'bower_components/lf-ng-md-file-input/dist/lf-ng-md-file-input.js',
+      'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

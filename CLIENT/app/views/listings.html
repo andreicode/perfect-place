@@ -1,4 +1,5 @@
-<md-content style="background: none;" class="md-padding" layout-xs="column" layout="row">
+<md-content infinite-scroll="loadMore()" infinite-scroll-distance="0" infinite-scroll-parent="true" style="background: none;"
+    class="md-padding" layout-xs="column" layout="row">
 
     <div flex-xs flex-gt-sm="33" layout="column">
 
@@ -18,11 +19,14 @@
             <md-card-content>
                 <p ng-if="listing.description.length <= 200">{{listing.description}}</p>
                 <p ng-if="listing.description.length > 200">{{listing.description |limitTo: 197}}...</p>
+                <p><b>Price</b>: {{ listing.price }} $</p>
+                <p><b>Address:</b> {{ listing.address }}</p>
+                <p><b>Seller:</b> {{ listing.user.name }}</p>
             </md-card-content>
 
             <md-card-actions layout="row" layout-align="end center">
                 <md-button>More details</md-button>
-                <md-button>Save</md-button>
+                <md-button>Bookmark</md-button>
             </md-card-actions>
         </md-card>
 
@@ -45,11 +49,14 @@
             <md-card-content>
                 <p ng-if="listing.description.length <= 200">{{listing.description}}</p>
                 <p ng-if="listing.description.length > 200">{{listing.description |limitTo: 197}}...</p>
+                <p><b>Price</b>: {{ listing.price }} $</p>
+                <p><b>Address:</b> {{ listing.address }}</p>
+                <p><b>Seller:</b> {{ listing.user.name }}</p>
             </md-card-content>
 
             <md-card-actions layout="row" layout-align="end center">
                 <md-button>More details</md-button>
-                <md-button>Save</md-button>
+                <md-button>Bookmark</md-button>
             </md-card-actions>
         </md-card>
 
@@ -72,11 +79,14 @@
             <md-card-content>
                 <p ng-if="listing.description.length <= 200">{{listing.description}}</p>
                 <p ng-if="listing.description.length > 200">{{listing.description |limitTo: 197}}...</p>
+                <p><b>Price</b>: {{ listing.price }} $</p>
+                <p><b>Address:</b> {{ listing.address }}</p>
+                <p><b>Seller:</b> {{ listing.user.name }}</p>
             </md-card-content>
 
             <md-card-actions layout="row" layout-align="end center">
                 <md-button>More details</md-button>
-                <md-button>Save</md-button>
+                <md-button>Bookmark</md-button>
             </md-card-actions>
         </md-card>
 
@@ -84,6 +94,6 @@
 
 </md-content>
 
-<!--<div layout="row" layout-align="space-around">
+<div ng-if="loading" layout="row" layout-align="space-around">
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-</div>-->
+</div>

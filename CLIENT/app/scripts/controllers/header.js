@@ -8,7 +8,7 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('HeaderCtrl', function ($scope, $location, $mdSidenav) {
+    .controller('HeaderCtrl', function ($scope, $rootScope, $location, $mdSidenav) {
 
         $scope.toggleMenu = function () {
 
@@ -25,7 +25,7 @@ angular.module('perfectPlaceApp')
 
         $scope.openAdvancedFilters = function () {
 
-            
+
 
         };
 
@@ -62,5 +62,11 @@ angular.module('perfectPlaceApp')
             }
 
         };
+
+        $scope.setFilter = function (filter, value) {
+
+            $rootScope.$emit('filter', { filter: filter, value: value });
+
+        }
 
     });

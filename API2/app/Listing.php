@@ -23,4 +23,10 @@ class Listing extends Model
         return url('storage/' . $value);
 
     }
+
+    public function user() {
+
+        return $this->hasOne('App\User', 'id', 'user_id');
+
+    }
 }

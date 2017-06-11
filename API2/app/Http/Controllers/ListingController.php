@@ -12,10 +12,23 @@ use JWTAuth;
 
 
 class ListingController extends Controller
-{
-    public function all() {
+{   
 
-        $listings = Listing::orderBy('created_at', 'DESC')->get();
+    protected $pageSize = 9;
+
+    public function all(Request $request) {
+
+        $listings = Listing::with('user')
+            ->when($request->has('search'), function ($query) use($request) {
+
+                return $query->where('title', 'LIKE', '%' . $request->search . '%')
+                   ->orWhere('description', 'LIKE', '%' . $request->search . '%');
+                   
+            })
+            ->orderBy($request->has('order') ? $request->order : 'created_at', $request->has('orderType') ? $request->orderType : 'DESC')
+            ->skip($request->has('page') ? $request->page : 0)
+            ->limit($this->pageSize)
+            ->get();
     
         return response()->json(compact('listings'));
 
@@ -23,7 +36,7 @@ class ListingController extends Controller
 
     public function single($id) {
 
-        $listing = Listing::find($id);
+        $listing = Listing::with('user')->find($id);
 
         return response()->json(compact('listing'));
     }

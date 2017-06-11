@@ -18,7 +18,8 @@ angular
         'ngMaterial',
         'ngMap',
         'satellizer',
-        'lfNgMdFileInput'
+        'lfNgMdFileInput',
+        'infinite-scroll'
     ])
     .constant('API_URL', 'http://localhost:8000/')
     .config(function (API_URL, $routeProvider, $authProvider) {
