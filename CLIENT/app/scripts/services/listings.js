@@ -17,6 +17,12 @@ angular.module('perfectPlaceApp')
 
                 return $http.get(API_URL + 'listing/all');
 
+            },
+
+            getSingle: function (id) {
+
+                return $http.get(API_URL + 'listing/' + id);
+
             }
 
         }

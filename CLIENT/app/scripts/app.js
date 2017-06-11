@@ -42,6 +42,11 @@ angular
                 controller: 'ListingsCtrl',
                 controllerAs: 'listings'
             })
+            .when('/listing/:id', {
+                templateUrl: 'views/listing.html',
+                controller: 'ListingCtrl',
+                controllerAs: 'listing'
+            })
             .when('/my-listings', {
                 templateUrl: 'views/my-listings.html',
                 controller: 'MyListingsCtrl',

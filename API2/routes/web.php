@@ -23,8 +23,20 @@ Route::group(['prefix' => 'login'], function () {
 
 Route::group(['prefix' => 'listing'], function () {
 
-    Route::get('/all', 'ListingController@all');
-    Route::get('/{id}', 'ListingController@single');
+    Route::get('all', 'ListingController@all');
+    Route::get('map', 'ListingController@map');
+    Route::get('{id}', 'ListingController@single');
+
+    Route::group(['middleware' => 'jwt.auth'], function () {
+
+        Route::get('my', 'ListingController@my');
+        Route::get('my/{id}', 'ListingController@mySingle');
+        Route::post('store', 'ListingController@store');
+        Route::put('{id}', 'ListingController@update');
+        Route::delete('{id}', 'ListingsController@delete');
+
+    });
+
 
 });
 
