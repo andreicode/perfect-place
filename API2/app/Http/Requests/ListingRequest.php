@@ -24,7 +24,16 @@ class ListingRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required',
+            'description' => 'required|max:1000',
+            'address' => 'required',
+            'rental' => 'required|boolean',
+            'roomNumber' => 'required|numeric',
+            'phone' => 'required',
+            'lat' => 'required|numeric',
+            'long' => 'required|numeric',
+            'price' => 'required|numeric',
+            'image' => 'required|image'
         ];
     }
 }

@@ -17,7 +17,8 @@ angular
         'ngSanitize',
         'ngMaterial',
         'ngMap',
-        'satellizer'
+        'satellizer',
+        'lfNgMdFileInput'
     ])
     .constant('API_URL', 'http://localhost:8000/')
     .config(function (API_URL, $routeProvider, $authProvider) {

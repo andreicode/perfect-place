@@ -8,21 +8,30 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('MyListingsCtrl', function ($scope, $mdDialog) {
-        $scope.showPrompt = function (ev) {
-            // Appending dialog to document.body to cover sidenav in docs app
-            var confirm = $mdDialog.prompt()
-                .title('Add a new listing')
-                .textContent('This is a placeholder')
-                .placeholder('Test')
-                .ariaLabel('Okay')
-                .initialValue('Test')
-                .targetEvent(ev)
-                .ok('Okay!')
-                .cancel('Okay');
+    .controller('MyListingsCtrl', function ($scope, $mdDialog, listings) {
 
-            $mdDialog.show(confirm).then(function (result) {
-            }, function () {
-            });
+        $scope.listings = [];
+
+        $scope.addListing = function (ev) {
+
+            $mdDialog.show({
+                controller: 'AddListingCtrl',
+                templateUrl: 'views/add-listing.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+            })
+                .then(function (answer) {
+                    $scope.status = 'You said the information was "' + answer + '".';
+                }, function () {
+                    $scope.status = 'You cancelled the dialog.';
+                });
         };
+
+        listings.getMy().then(function (response) {
+
+            $scope.listings = response.data.listings;
+
+        }, function (err) { console.log(err); });
+
     });

@@ -1,8 +1,5 @@
 <div class="main-map-container" map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx7V5B7aad4DJJArvDoZfG5i7AEmyle1w">
     <ng-map class="main-map" center="[51.5091615,-0.1194603]">
-        <!--<md-button class="md-fab map-fab" aria-label="Filter map" ng-click="openFilters()">
-            <i class="fa fa-sliders"></i>
-        </md-button>-->
     </ng-map>
 
 
@@ -23,8 +20,7 @@
                     <md-switch ng-model="filters.pollution" aria-label="Pollution Filter" ng-change="setFilter('pollution', filters.polution)"><i class="fa fa-trash" aria-hidden="true"></i> Pollution</md-switch>
                 </md-list-item>
                 <md-list-item>
-                    <md-switch ng-model="filters.noise" aria-label="Noise Filter" ng-change="setFilter('noise', filters.noise)"><i class="fa fa-volume-up" aria-hidden="true"></i>
- Noise Pollution</md-switch>
+                    <md-switch ng-model="filters.noise" aria-label="Noise Filter" ng-change="setFilter('noise', filters.noise)"><i class="fa fa-volume-up" aria-hidden="true"></i> Noise Pollution</md-switch>
                 </md-list-item>
                 <md-list-item>
                     <md-switch ng-model="filters.smog" aria-label="Smog Filter" ng-change="setFilter('smog', filters.smog)"><i class="fa fa-cloud" aria-hidden="true"></i> Smog</md-switch>
@@ -36,12 +32,12 @@
                     <md-switch ng-model="filters.estate" aria-label="Estate Value Filter" ng-change="setFilter('estate', filters.estate)"><i class="fa fa-usd" aria-hidden="true"></i> Estate Value</md-switch>
                 </md-list-item>
                 <md-list-item>
-                    <md-switch ng-model="filters.temperature" aria-label="Temperature Filter" ng-change="setFilter('temperature', filters.temperature)"><i class="fa fa-thermometer-empty" aria-hidden="true"></i>
- Temperature</md-switch>
+                    <md-switch ng-model="filters.temperature" aria-label="Temperature Filter" ng-change="setFilter('temperature', filters.temperature)"><i class="fa fa-thermometer-empty" aria-hidden="true"></i> Temperature
+                    </md-switch>
                 </md-list-item>
                 <md-list-item>
-                    <md-switch ng-model="filters.living" aria-label="Living Cost Filter" ng-change="setFilter('living', filters.Living)"><i class="fa fa-heart" aria-hidden="true"></i>
- Living</md-switch>
+                    <md-switch ng-model="filters.living" aria-label="Living Cost Filter" ng-change="setFilter('living', filters.Living)"><i class="fa fa-heart" aria-hidden="true"></i> Living
+                    </md-switch>
                 </md-list-item>
             </md-list>
 
