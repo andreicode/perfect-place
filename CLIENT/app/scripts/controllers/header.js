@@ -8,7 +8,11 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('HeaderCtrl', function ($scope, $rootScope, $location, $mdSidenav, user) {
+    .controller('HeaderCtrl', function ($scope, $auth, $rootScope, $location, $mdSidenav, user) {
+
+        $scope.isAuthenticated = function () {
+            return $auth.isAuthenticated();
+        };
 
         user.subscribe(function (user) {
 

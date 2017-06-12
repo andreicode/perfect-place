@@ -86,7 +86,7 @@
                     </md-menu>
                 </span>
 
-                <img class="header-avatar" ng-src={{user.avatar}}>
+                <img ng-if="isAuthenticated()" class="header-avatar" ng-src={{user.avatar}}>
 
             </div>
         </md-toolbar>

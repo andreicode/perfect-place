@@ -49,3 +49,13 @@ Route::group(['prefix' => 'bookmark', 'middleware' => 'jwt.auth'], function () {
 
 });
 
+Route::get('api/estate', function () {
+
+    $path = storage_path() . "/app/public/estate-value.json"; 
+
+    $json = json_decode(file_get_contents($path), true); 
+
+    return response()->json($json);
+
+});
+

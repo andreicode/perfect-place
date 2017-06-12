@@ -21,7 +21,8 @@ angular
         'lfNgMdFileInput',
         'infinite-scroll'
     ])
-    .constant('API_URL', 'http://localhost:8000/')
+    .constant('API_URL', 'http://46.101.132.152/')
+    // .constant('API_URL', 'http://localhost:8000/')    
     .config(function (API_URL, $routeProvider, $authProvider) {
         $routeProvider
             .when('/login', {
@@ -75,9 +76,15 @@ angular
                 redirectTo: '/map'
             });
 
+        // $authProvider.facebook({
+        //     clientId: '752540668240093',
+        //     url: API_URL + 'login/facebook',
+        //     redirectUri: 'http://localhost:9000/'
+        // });
+
         $authProvider.facebook({
-            clientId: '752540668240093',
+            clientId: '772118919625649',
             url: API_URL + 'login/facebook',
-            redirectUri: 'http://localhost:9000/'
+            redirectUri: 'http://138.68.94.135/perf/'
         });
     });

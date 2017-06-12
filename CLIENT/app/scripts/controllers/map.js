@@ -21,6 +21,8 @@ angular.module('perfectPlaceApp')
 
         var estateF = [];
 
+        var weatherF = [];
+
         NgMap.getMap({ id: 'main-map' }).then(function (map) {
 
             var transitLayer = new google.maps.TransitLayer();
@@ -34,7 +36,6 @@ angular.module('perfectPlaceApp')
 
             }).then(function (response) {
 
-                console.log(response);
                 var estateFilter = response.data.items;
 
                 for (var i = 0; i < estateFilter.length; i++) {
@@ -59,10 +60,44 @@ angular.module('perfectPlaceApp')
                     });
 
                     estateF.push(poli);
-                    // poli.setMap(map);
                 }
 
-            })
+            });
+
+            $http({
+
+                method: 'GET',
+                url: 'http://46.101.132.152/api/weather',
+                transformRequest: angular.identity,
+            }).then(function (response) {
+
+                var data = response.data.weatherObservations;
+
+
+                for (var i = 0; i < data.length; i++) {
+
+                    var circ = new google.maps.Circle({
+
+                        strokeColor: '#330033',
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: '#FF00FF',
+                        fillOpacity: 0.35,
+                        map: null,
+                        center: {
+                            lat: data[i].lat,
+                            lng: data[i].lng
+                        },
+                        radius: 10000
+
+                    });
+
+                    weatherF.push(circ);
+
+                }
+
+
+            });
 
             var airQualityMarkers = [];
 
@@ -165,7 +200,6 @@ angular.module('perfectPlaceApp')
 
                 } else if (filter === 'estate') {
 
-                    console.log(value);
 
                     if (value) {
 
@@ -179,6 +213,30 @@ angular.module('perfectPlaceApp')
 
 
                         estateF.forEach(function (item) {
+
+                            item.setMap(null);
+
+                        })
+
+                    }
+
+                } else if (filter === 'temperature') {
+
+
+                    if (value) {
+
+                        weatherF.forEach(function (item) {
+
+                            console.log(item);
+
+                            item.setMap(map);
+
+                        })
+
+                    } else {
+
+
+                        weatherF.forEach(function (item) {
 
                             item.setMap(null);
 
