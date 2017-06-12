@@ -8,7 +8,7 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('MapCtrl', function ($scope, $mdSidenav, NgMap, mapService, airQuality) {
+    .controller('MapCtrl', function ($scope, $mdSidenav, NgMap, mapService, airQuality, $http) {
 
         $scope.openFilters = function () {
 
@@ -19,11 +19,50 @@ angular.module('perfectPlaceApp')
         $scope.filters = {};
         $scope.setFilter = function () { };
 
+        var estateF = [];
+
         NgMap.getMap({ id: 'main-map' }).then(function (map) {
 
             var transitLayer = new google.maps.TransitLayer();
             var trafficLayer = new google.maps.TrafficLayer();
             var bikeLayer = new google.maps.BicyclingLayer();
+
+            $http({
+
+                method: 'GET',
+                url: 'http://46.101.132.152/api/estate'
+
+            }).then(function (response) {
+
+                console.log(response);
+                var estateFilter = response.data.items;
+
+                for (var i = 0; i < estateFilter.length; i++) {
+
+                    var temp = estateFilter[i];
+
+                    var coord = [];
+
+                    for (var j = 0; j < temp.length; j++) {
+                        coord.push({ lat: temp[j].lat, lng: temp[j].long });
+                    }
+
+                    var poli = new google.maps.Polygon({
+
+                        paths: coord,
+                        strokeColor: '#FF0000 ',
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: '#FF0000 ',
+                        fillOpacity: 0.35
+
+                    });
+
+                    estateF.push(poli);
+                    // poli.setMap(map);
+                }
+
+            })
 
             var airQualityMarkers = [];
 
@@ -123,6 +162,29 @@ angular.module('perfectPlaceApp')
                     } else {
 
                         removeAQFilter();
+
+                    }
+
+                } else if (filter === 'estate') {
+
+                    console.log(value);
+
+                    if (value) {
+
+                        estateF.forEach(function (item) {
+
+                            item.setMap(map);
+
+                        })
+
+                    } else {
+
+
+                        estateF.forEach(function (item) {
+
+                            item.setMap(null);
+
+                        })
 
                     }
 
