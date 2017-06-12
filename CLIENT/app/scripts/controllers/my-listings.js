@@ -8,7 +8,7 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('MyListingsCtrl', function ($scope, $rootScope, $mdDialog, listings, $location) {
+    .controller('MyListingsCtrl', function ($auth, $scope, $rootScope, $mdDialog, listings, $location, bookmark) {
 
         $scope.loading = true;
 
@@ -17,6 +17,10 @@ angular.module('perfectPlaceApp')
         var filters = {
             page: 0
         }
+
+        $scope.isAuthenticated = function () {
+            return $auth.isAuthenticated();
+        };
 
         $scope.addListing = function (ev) {
 
@@ -109,6 +113,36 @@ angular.module('perfectPlaceApp')
             console.log(id);
 
             $location.path('/listing/' + id);
+
+        }
+
+        $scope.addBookmark = function (listing) {
+
+            listing.book = true;
+
+            bookmark.add(listing.id).then(function () {
+
+            }, function (err) {
+
+                console.log(err);
+                listing.book = false;
+
+            });
+
+        }
+
+        $scope.removeBookmark = function (listing) {
+
+            listing.book = false;
+
+            bookmark.remove(listing.id).then(function () {
+
+            }, function (err) {
+
+                console.log(err);
+                listing.book = true;
+
+            });
 
         }
 

@@ -44,8 +44,6 @@
                 <h2 md-truncate>{{getHeaderByLocation()}}</h2>
                 <div flex></div>
 
-
-
                 <span ng-if="main.getLocation() === '/map'">
                     <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleMapFilters()">
                         <i class="fa fa-map-o" aria-hidden="true"></i>
@@ -87,6 +85,9 @@
                         </md-menu-content>
                     </md-menu>
                 </span>
+
+                <img class="header-avatar" ng-src={{user.avatar}}>
+
             </div>
         </md-toolbar>
 
@@ -148,6 +149,7 @@
     <script src="scripts/controllers/add-listing.js"></script>
     <script src="scripts/controllers/edit-listing.js"></script>
     <script src="scripts/services/air-quality.js"></script>
+    <script src="scripts/services/bookmark.js"></script>
     <!-- endbuild -->
 </body>
 

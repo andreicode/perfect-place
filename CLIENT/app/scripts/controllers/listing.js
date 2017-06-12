@@ -8,21 +8,23 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('ListingCtrl', function (API_URL, $scope, $http, $location, $routeParams, listings, user, NgMap, $mdDialog) {
+    .controller('ListingCtrl', function (API_URL, $auth, $scope, $http, $location, $routeParams, listings, user, NgMap, $mdDialog, bookmark) {
 
-        $scope.listing = {};
+        $scope.listing = undefined;
 
-        $scope.user = {};
-
+        $scope.user = user.get();
 
         console.log(user.get());
 
-        user.get().then(function (response) {
+        user.subscribe(function (data) {
 
-            $scope.user = response;
+            $scope.user = data;
 
         });
 
+        $scope.isAuthenticated = function () {
+            return $auth.isAuthenticated();
+        };
 
         NgMap.getMap({ id: 'single-map' }).then(function (map) {
 
@@ -84,6 +86,36 @@ angular.module('perfectPlaceApp')
                 $location.path('/my-listings');
 
             }, function () {
+
+            });
+
+        }
+
+        $scope.addBookmark = function (listing) {
+
+            listing.book = true;
+
+            bookmark.add(listing.id).then(function () {
+
+            }, function (err) {
+
+                console.log(err);
+                listing.book = false;
+
+            });
+
+        }
+
+        $scope.removeBookmark = function (listing) {
+
+            listing.book = false;
+
+            bookmark.remove(listing.id).then(function () {
+
+            }, function (err) {
+
+                console.log(err);
+                listing.book = true;
 
             });
 

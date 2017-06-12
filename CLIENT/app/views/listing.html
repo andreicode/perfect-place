@@ -52,9 +52,10 @@
             </md-card-content>
 
             <md-card-actions layout="row" layout-align="end center">
-                <md-button ng-click="editListing($event, listing)" ng-if="user.id === listing.user_id">Edit</md-button>
-                <md-button ng-click="deleteListing($event, listing.id)" ng-if="user.id === listing.user_id">Delete</md-button>
-                <md-button ng-if="user.id !== listing.user_id">Bookmark</md-button>
+                <md-button ng-click="editListing($event, listing)" ng-if="user.id === listing.user_id && user !== undefined && listing !== undefined">Edit</md-button>
+                <md-button ng-click="deleteListing($event, listing.id)" ng-if="user.id === listing.user_id && user !== undefined && listing !== undefined">Delete</md-button>
+                <md-button aria-label="Add bookmark" ng-if="isAuthenticated() && !listing.book" ng-click="addBookmark(listing)"><i class="fa fa-heart-o"></i></md-button>
+                <md-button aria-label="Remove bookmark" ng-if="isAuthenticated() && listing.book" ng-click="removeBookmark(listing)"><i class="fa fa-heart"></i></md-button>
             </md-card-actions>
 
         </md-card>

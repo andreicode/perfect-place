@@ -28,6 +28,8 @@
 
             <md-card-actions layout="row" layout-align="end center">
                 <md-button ng-click="moreDetails(listing.id)">More details</md-button>
+                <md-button aria-label="Add bookmark" ng-if="isAuthenticated() && !listing.book" ng-click="addBookmark(listing)"><i class="fa fa-heart-o"></i></md-button>
+                <md-button aria-label="Remove bookmark" ng-if="isAuthenticated() && listing.book" ng-click="removeBookmark(listing)"><i class="fa fa-heart"></i></md-button>
             </md-card-actions>
         </md-card>
 
@@ -54,6 +56,8 @@
 
             <md-card-actions layout="row" layout-align="end center">
                 <md-button ng-click="moreDetails(listing.id)">More details</md-button>
+                <md-button aria-label="Add bookmark" ng-if="isAuthenticated() && !listing.book" ng-click="addBookmark(listing)"><i class="fa fa-heart-o"></i></md-button>
+                <md-button aria-label="Remove bookmark" ng-if="isAuthenticated() && listing.book" ng-click="removeBookmark(listing)"><i class="fa fa-heart"></i></md-button>
             </md-card-actions>
         </md-card>
 
@@ -80,6 +84,8 @@
 
             <md-card-actions layout="row" layout-align="end center">
                 <md-button ng-click="moreDetails(listing.id)">More details</md-button>
+                <md-button aria-label="Add bookmark" ng-if="isAuthenticated() && !listing.book" ng-click="addBookmark(listing)"><i class="fa fa-heart-o"></i></md-button>
+                <md-button aria-label="Remove bookmark" ng-if="isAuthenticated() && listing.book" ng-click="removeBookmark(listing)"><i class="fa fa-heart"></i></md-button>
             </md-card-actions>
         </md-card>
 
