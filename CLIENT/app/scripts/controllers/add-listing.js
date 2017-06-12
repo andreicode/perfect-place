@@ -70,7 +70,7 @@ angular.module('perfectPlaceApp')
             }).then(function (response) {
 
                 console.log(response);
-                $mdDialog.hide();
+                $mdDialog.hide(response);
 
             }, function (err) {
 

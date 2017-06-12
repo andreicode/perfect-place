@@ -27,10 +27,10 @@ angular.module('perfectPlaceApp')
                 targetEvent: ev,
                 clickOutsideToClose: true,
             })
-                .then(function (answer) {
-                    $scope.status = 'You said the information was "' + answer + '".';
+                .then(function (response) {
+                    $scope.listings.unshift(response.data.listing);
                 }, function () {
-                    $scope.status = 'You cancelled the dialog.';
+
                 });
         };
 
