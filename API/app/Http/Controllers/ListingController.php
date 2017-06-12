@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Listing;
 use App\Http\Requests\ListingRequest;
 use App\Http\Requests\ListingUpdateRequest;
+use App\Bookmark;
 
 use Image;
 use JWTAuth;
@@ -139,6 +140,12 @@ class ListingController extends Controller
         $listing = Listing::where('id', $id)->where('user_id', $user->id)->first();
 
         if ($listing) {
+
+            $bookmarks = Bookmark::where('listing_id', $listing->id)->get()->each(function ($bookmark){
+
+                       $bookmark->delete();
+
+            });
 
             $listing->delete();
 
