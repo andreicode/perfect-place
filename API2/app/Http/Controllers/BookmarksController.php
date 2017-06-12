@@ -13,7 +13,7 @@ class BookmarksController extends Controller
 
         $user = JWTAuth::parseToken()->toUser();
 
-        $bookmarks = Bookmark::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
+        $bookmarks = Bookmark::with('listing')->where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
 
         return $bookmarks;
 

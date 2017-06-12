@@ -9,9 +9,6 @@
  */
 angular.module('perfectPlaceApp')
     .controller('BookmarksCtrl', function () {
-        this.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
+        $scope.bookmarks = {};
+
     });
