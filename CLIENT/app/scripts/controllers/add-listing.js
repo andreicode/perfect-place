@@ -51,7 +51,7 @@ angular.module('perfectPlaceApp')
             formData.append('title', $scope.listing.title);
             formData.append('phone', $scope.listing.phone);
             formData.append('address', $scope.listing.address);
-            formData.append('rental', $scope.listing.rental);
+            formData.append('rental', $scope.listing.rental ? 1 : 0);
             formData.append('price', $scope.listing.price);
             formData.append('roomNumber', $scope.listing.roomNumber);
             formData.append('description', $scope.listing.description);

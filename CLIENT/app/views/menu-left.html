@@ -24,7 +24,7 @@
         <md-list-item ng-click="closeSidenav()" ng-class="main.getLocation() === '/contact' ? 'menu-active' : ' '" ng-href="#!/contact">
             Contact
         </md-list-item>
-        <md-list-item ng-if="isAuthenticated()" ng-click="closeSidenav()">
+        <md-list-item ng-if="isAuthenticated()" ng-click="logout()">
             Logout
         </md-list-item>
         <md-list-item ng-if="!isAuthenticated()" ng-click="openLogin()">
