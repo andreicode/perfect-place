@@ -14,9 +14,11 @@ class CreateBookmarksTable extends Migration
     public function up()
     {
         Schema::create('bookmarks', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('user_id')->references('id')->on('users');
             $table->integer('listing_id')->references('id')->on('listings');
-            $table->primary(['user_id', 'listing_id']);
+            $table->index(['user_id', 'listing_id'])->unique();
+            $table->timestamps();
         });
     }
 

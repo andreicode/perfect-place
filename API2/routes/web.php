@@ -40,3 +40,12 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/', 'UserController@user');
 
 });
+
+    Route::group(['prefix' => 'bookmark', 'middleware' => 'jwt.auth'], function () {
+
+        Route::get('all', 'BookmarksController@all');
+        Route::post('/{id}', 'BookmarksController@create');
+        Route::delete('/{id}', 'BookmarksController@delete');
+
+    });
+

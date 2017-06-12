@@ -41,3 +41,4 @@ $factory->define(App\Listing::class, function (Faker\Generator $faker) {
         
     ];
 });
+
