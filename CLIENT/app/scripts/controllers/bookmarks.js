@@ -17,7 +17,12 @@ angular.module('perfectPlaceApp')
             url: API_URL + 'bookmark/all'
         }).then(function (response) {
 
-            console.log(response);
+            if (!response.data.bookmarks || !response.data.bookmarks.length) {
+
+                $scope.noData = true;
+                return;
+
+            }
 
             $scope.listings = response.data.bookmarks;
 
@@ -33,6 +38,12 @@ angular.module('perfectPlaceApp')
             bookmark.remove(listing.id).then(function () {
 
                 $scope.listings.splice(index, 1);
+
+                if (!$scope.listings.length) {
+
+                    $scope.noData = true;
+
+                }
 
             }, function (err) {
 

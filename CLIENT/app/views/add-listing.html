@@ -10,7 +10,7 @@
             <div class="md-dialog-content">
 
                 <div class="main-map-container" map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx7V5B7aad4DJJArvDoZfG5i7AEmyle1w">
-                    <ng-map class="main-map" id="add-map" center="[51.5091615,-0.1194603]">
+                    <ng-map ng-if="loaded" class="main-map" id="add-map" center="[51.5091615,-0.1194603]">
                     </ng-map>
                 </div>
 
@@ -52,7 +52,7 @@
             <md-button ng-click="addListing()">
                 Save
             </md-button>
-            <md-button ng-click="cancel()">
+            <md-button ng-click="close()">
                 Cancel
             </md-button>
         </md-dialog-actions>

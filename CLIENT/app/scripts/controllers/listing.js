@@ -8,13 +8,11 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('ListingCtrl', function (API_URL, $auth, $scope, $http, $location, $routeParams, listings, user, NgMap, $mdDialog, bookmark) {
+    .controller('ListingCtrl', function (API_URL, $timeout, $auth, $scope, $http, $location, $routeParams, listings, user, NgMap, $mdDialog, bookmark) {
 
         $scope.listing = undefined;
 
         $scope.user = user.get();
-
-        console.log(user.get());
 
         user.subscribe(function (data) {
 
@@ -28,8 +26,14 @@ angular.module('perfectPlaceApp')
 
         NgMap.getMap({ id: 'single-map' }).then(function (map) {
 
-
             listings.getSingle($routeParams.id).then(function (response) {
+
+                if (!response.data.listing) {
+
+                    $scope.noData = true;
+                    return;
+
+                }
 
                 $scope.listing = response.data.listing;
 
@@ -40,7 +44,8 @@ angular.module('perfectPlaceApp')
 
                 });
 
-                map.setCenter({ lat: $scope.listing.lat, lng: $scope.listing.long });
+                google.maps.event.trigger(map, 'resize');
+                map.setCenter(new google.maps.LatLng($scope.listing.lat, $scope.listing.long));
 
             }, function (err) {
 

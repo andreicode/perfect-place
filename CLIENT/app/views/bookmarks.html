@@ -1,5 +1,4 @@
-<md-content infinite-scroll="loadMore()" infinite-scroll-distance="0" infinite-scroll-parent="true" style="background: none;"
-    class="md-padding" layout-xs="column" layout="row">
+<md-content style="background: none;" class="md-padding" layout-xs="column" layout="row">
 
     <div flex-xs flex-gt-sm="33" layout="column">
 
@@ -94,6 +93,6 @@
 
 </md-content>
 
-<div ng-if="loading" layout="row" layout-align="space-around">
-    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-</div>
+<md-content ng-if="noData" style="background: none;" class="md-padding" layout-xs="column" layout="row">
+    <h3> No data found </h3>
+</md-content>

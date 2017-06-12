@@ -40,9 +40,19 @@ angular.module('perfectPlaceApp')
 
         listings.getMy().then(function (response) {
 
+            if (!response.data.listings || !response.data.listings.length) {
+
+                $scope.loading = false;
+                $scope.noData = true;
+                return;
+
+            }
+
             $scope.listings = response.data.listings;
 
             $scope.loading = false;
+
+
 
         }, function (err) {
 

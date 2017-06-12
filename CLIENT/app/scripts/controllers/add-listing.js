@@ -8,12 +8,20 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('AddListingCtrl', function (API_URL, $scope, NgMap, $mdDialog, $http) {
+    .controller('AddListingCtrl', function (API_URL, $timeout, $scope, NgMap, $mdDialog, $http) {
 
         $scope.file = undefined;
         $scope.listing = {};
 
         var marker = undefined;
+
+        $scope.loaded = false;
+
+        $timeout(function () {
+
+            $scope.loaded = true;
+
+        }, 100);
 
         NgMap.getMap({ id: 'add-map' }).then(function (map) {
 
@@ -26,6 +34,9 @@ angular.module('perfectPlaceApp')
 
                 }
 
+                google.maps.event.trigger(map, 'resize');
+
+
                 marker = new google.maps.Marker({
 
                     position: ev.latLng,
@@ -36,6 +47,7 @@ angular.module('perfectPlaceApp')
             });
 
         });
+
 
         $scope.close = function () {
 
@@ -58,7 +70,6 @@ angular.module('perfectPlaceApp')
             formData.append('lat', marker.position.lat());
             formData.append('long', marker.position.lng());
 
-            // console.log(marker, formData);
             $http({
                 method: 'POST',
                 url: API_URL + 'listing/store',
@@ -69,7 +80,6 @@ angular.module('perfectPlaceApp')
                 }
             }).then(function (response) {
 
-                console.log(response);
                 $mdDialog.hide(response);
 
             }, function (err) {

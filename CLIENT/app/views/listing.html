@@ -1,4 +1,4 @@
-<md-content style="background: none;" class="md-padding" layout-xs="column" layout="row">
+<md-content ng-if="!noData" style="background: none;" class="md-padding" layout-xs="column" layout="row">
 
     <div flex-xs flex-gt-sm="50" layout="column">
 
@@ -62,4 +62,8 @@
 
     </div>
 
+</md-content>
+
+<md-content ng-if="noData" style="background: none;" class="md-padding" layout-xs="column" layout="row">
+    <h3> No data found </h3>
 </md-content>
