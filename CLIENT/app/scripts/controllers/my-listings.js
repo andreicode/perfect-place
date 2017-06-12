@@ -8,7 +8,7 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('MyListingsCtrl', function ($scope, $rootScope, $mdDialog, listings, $location) {
+    .controller('MyListingsCtrl', function ($auth, $scope, $rootScope, $mdDialog, listings, $location, bookmark) {
 
         $scope.loading = true;
 
@@ -17,6 +17,10 @@ angular.module('perfectPlaceApp')
         var filters = {
             page: 0
         }
+
+        $scope.isAuthenticated = function () {
+            return $auth.isAuthenticated();
+        };
 
         $scope.addListing = function (ev) {
 
@@ -27,18 +31,28 @@ angular.module('perfectPlaceApp')
                 targetEvent: ev,
                 clickOutsideToClose: true,
             })
-                .then(function (answer) {
-                    $scope.status = 'You said the information was "' + answer + '".';
+                .then(function (response) {
+                    $scope.listings.unshift(response.data.listing);
                 }, function () {
-                    $scope.status = 'You cancelled the dialog.';
+
                 });
         };
 
         listings.getMy().then(function (response) {
 
+            if (!response.data.listings || !response.data.listings.length) {
+
+                $scope.loading = false;
+                $scope.noData = true;
+                return;
+
+            }
+
             $scope.listings = response.data.listings;
 
             $scope.loading = false;
+
+
 
         }, function (err) {
 
@@ -109,6 +123,36 @@ angular.module('perfectPlaceApp')
             console.log(id);
 
             $location.path('/listing/' + id);
+
+        }
+
+        $scope.addBookmark = function (listing) {
+
+            listing.book = true;
+
+            bookmark.add(listing.id).then(function () {
+
+            }, function (err) {
+
+                console.log(err);
+                listing.book = false;
+
+            });
+
+        }
+
+        $scope.removeBookmark = function (listing) {
+
+            listing.book = false;
+
+            bookmark.remove(listing.id).then(function () {
+
+            }, function (err) {
+
+                console.log(err);
+                listing.book = true;
+
+            });
 
         }
 

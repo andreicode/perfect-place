@@ -14,27 +14,6 @@ angular.module('perfectPlaceApp')
 
         var marker = undefined;
 
-        // NgMap.getMap({ id: 'edit-map' }).then(function (map) {
-
-        //     // google.maps.event.addListener(map, 'click', function (ev) {
-
-        //     //     if (marker) {
-
-        //     //         marker.setMap(null);
-
-        //     //     }
-
-        //     //     marker = new google.maps.Marker({
-
-        //     //         position: ev.latLng,
-        //     //         map: map
-
-        //     //     });
-
-        //     // });
-
-        // });
-
         $scope.close = function () {
 
             $mdDialog.hide();

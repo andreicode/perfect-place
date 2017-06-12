@@ -153,8 +153,6 @@ angular.module('perfectPlaceApp')
                     }
                 } else if (filter === 'pollution') {
 
-                    console.log(value);
-
                     if (value) {
 
                         setAQFilter();
@@ -194,7 +192,6 @@ angular.module('perfectPlaceApp')
 
             var markers = [];
 
-
             mapService.get().then(function (response) {
 
                 var markerMap = response.data.map;
@@ -210,19 +207,23 @@ angular.module('perfectPlaceApp')
                     });
 
                     marker.content = markerMap[i].title;
+                    marker.price = markerMap[i].price;
+                    marker.rental = markerMap[i].rental ? '<i class="fa fa-home" aria-hidden="true"> Rental' : '<i class="fa fa-usd" aria-hidden="true"> Sale';
+                    marker.rooms = markerMap[i].rooms;
                     marker.listingId = markerMap[i].id;
 
                     var infowindow = new google.maps.InfoWindow();
 
-
                     google.maps.event.addListener(marker, 'click', function () {
 
-                        infowindow.setContent(this.content + '<br><small><a href="/#!/listing/' + this.listingId + '"> More details...</a></small>');
+                        infowindow.setContent('<b>' + this.content + '<b><br><br>' + this.rental + '<br>Price: ' + this.price + ' $<br>Rooms: ' + this.rooms + '<br><br><a href="/#!/listing/' + this.listingId + '"> More details...</a>');
                         infowindow.open(this.getMap(), this);
 
                     });
 
                     marker.setMap(map);
+
+                    markers.push(marker);
 
                 }
 
@@ -232,67 +233,13 @@ angular.module('perfectPlaceApp')
 
             });
 
-            // //DUMMY MARKERS
-            // var prMarker1 = new google.maps.Marker({
-            //     position: { lat: 51.5091615, lng: -0.1194603 },
-            //     icon: '/images/pp-marker-2.png'
-            // });
+            // google.maps.event.addListener(map, 'zoom_changed', function () {
 
-            // var prMarker2 = new google.maps.Marker({
-            //     position: { lat: 51.503408, lng: -0.124245 },
-            //     icon: '/images/pp-marker-2.png'
-            // });
+            //     var zoom = map.getZoom();
 
-            // var prMarker3 = new google.maps.Marker({
-            //     position: { lat: 51.506857, lng: -0.127576 },
-            //     icon: '/images/pp-marker-2.png'
-            // });
+            //     for (var i )
 
-            // var prMarker4 = new google.maps.Marker({
-            //     position: { lat: 51.505075, lng: -0.113678 },
-            //     icon: '/images/pp-marker-2.png'
             // });
-
-            // var prMarker5 = new google.maps.Marker({
-            //     position: { lat: 51.510230, lng: -0.104182 },
-            //     icon: '/images/pp-marker-2.png'
-            // });
-
-            // var prMarker6 = new google.maps.Marker({
-            //     position: { lat: 51.512955, lng: -0.126927 },
-            //     icon: '/images/pp-marker-2.png'
-            // });
-
-            // var prMarker7 = new google.maps.Marker({
-            //     position: { lat: 51.507266, lng: -0.130918 },
-            //     icon: '/images/pp-marker-2.png'
-            // });
-
-            // var prMarker8 = new google.maps.Marker({
-            //     position: { lat: 51.516116, lng: -0.1159413 },
-            //     icon: '/images/pp-marker-2.png'
-            // });
-
-            // var prMarker9 = new google.maps.Marker({
-            //     position: { lat: 51.503820, lng: -0.112379 },
-            //     icon: '/images/pp-marker-2.png'
-            // });
-
-            // var prMarker10 = new google.maps.Marker({
-            //     position: { lat: 51.516961, lng: -0.138343 },
-            //     icon: '/images/pp-marker-2.png'
-            // });
-
-            // prMarker1.setMap(map);
-            // prMarker2.setMap(map);
-            // prMarker3.setMap(map);
-            // prMarker4.setMap(map);
-            // prMarker5.setMap(map);
-            // prMarker6.setMap(map);
-            // prMarker7.setMap(map);
-            // prMarker8.setMap(map);
-            // prMarker9.setMap(map);
-            // prMarker10.setMap(map);
 
         });
 

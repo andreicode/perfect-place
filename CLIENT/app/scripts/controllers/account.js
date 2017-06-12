@@ -8,10 +8,18 @@
  * Controller of the perfectPlaceApp
  */
 angular.module('perfectPlaceApp')
-    .controller('AccountCtrl', function () {
-        this.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
+    .controller('AccountCtrl', function ($scope, $timeout, user) {
+
+        user.subscribe(function (data) {
+
+            $timeout(function () {
+
+                $scope.user = data;
+
+            });
+
+        });
+
+        $scope.user = user.get();
+
     });

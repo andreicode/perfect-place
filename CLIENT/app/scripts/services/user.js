@@ -11,10 +11,33 @@ angular.module('perfectPlaceApp')
     .service('user', function (API_URL, $q, $auth, $http) {
 
         var _user = undefined;
+        var _callbacks = [];
 
         const getUser = function () {
 
             return $http.get(API_URL + 'user');
+
+        }
+
+        if ($auth.isAuthenticated()) {
+
+            getUser().then(function (response) {
+
+                _user = response.data.user;
+
+                emit();
+
+            }, function (err) { console.log(err); });
+
+        }
+
+        function emit() {
+
+            for (var i = 0; i < _callbacks.length; i++) {
+
+                _callbacks[i](_user);
+
+            }
 
         }
 
@@ -26,33 +49,22 @@ angular.module('perfectPlaceApp')
 
                     _user = response.data.user;
 
+                    emit();
+
                 }, function (err) { console.log(err); });
+
+            },
+
+            subscribe: function (cb) {
+
+                _callbacks.push(cb);
 
             },
 
             get: function () {
 
-                var q = $q.defer();
 
-                if (_user) {
-
-                    q.resolve(_user);
-
-                } else {
-
-
-                    getUser().then(function (response) {
-
-                        _user = response.data.user;
-
-                        q.resolve(_user);
-
-                    }, function (err) { console.log(err); });
-
-                }
-
-
-                return q.promise;
+                return _user;
 
             }
 

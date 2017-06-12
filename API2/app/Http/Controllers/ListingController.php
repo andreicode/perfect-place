@@ -50,7 +50,10 @@ class ListingController extends Controller
                 'id' => $listing->id,
                 'title' => $listing->title,
                 'lat' => $listing->lat,
-                'long' => $listing->long
+                'long' => $listing->long,
+                'price' => $listing->price,
+                'rooms' => $listing->roomNumber,
+                'rental' => $listing->rental                
             ];
 
         });
