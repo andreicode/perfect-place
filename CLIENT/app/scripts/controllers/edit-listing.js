@@ -30,6 +30,14 @@ angular.module('perfectPlaceApp')
 
             }
 
+            if (!marker) {
+
+                alert('Please fill in all the fields.');
+                return;
+
+            }
+
+
             formData.append('title', $scope.listing.title);
             formData.append('phone', $scope.listing.phone);
             formData.append('address', $scope.listing.address);
@@ -48,18 +56,15 @@ angular.module('perfectPlaceApp')
                 }
             }).then(function (response) {
 
-                console.log(response);
                 $mdDialog.hide(response.data.listing);
 
             }, function (err) {
 
+                alert('Please fill in all the fields.');
+
                 console.log(err);
 
             })
-
-
-
-
 
         };
     });
