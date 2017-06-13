@@ -67,7 +67,11 @@ angular.module('perfectPlaceApp')
             })
                 .then(function (response) {
 
+                    var usr = angular.copy($scope.listing.user);
                     $scope.listing = response;
+                    $scope.listing.rental = $scope.listing.rental === '1' ? 1 : 0;
+                    $scope.listing.user = usr;
+                
 
                 }, function () {
 

@@ -59,6 +59,13 @@ angular.module('perfectPlaceApp')
 
             var formData = new FormData();
 
+            if (!$scope.file.length || !marker) {
+
+                alert('Please fill in all the fields.');
+                return;
+
+            }
+
             formData.append('image', $scope.file[0].lfFile);
             formData.append('title', $scope.listing.title);
             formData.append('phone', $scope.listing.phone);
@@ -84,6 +91,7 @@ angular.module('perfectPlaceApp')
 
             }, function (err) {
 
+                alert('Please fill in all the fields.');
                 console.log(err);
 
             })

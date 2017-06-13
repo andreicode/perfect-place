@@ -35,6 +35,7 @@ angular.module('perfectPlaceApp')
             $auth.logout();
             $location.path('/');
             $scope.closeSidenav();
+            user.logout();
         }
 
     });
