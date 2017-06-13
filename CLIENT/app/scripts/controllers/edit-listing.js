@@ -30,13 +30,6 @@ angular.module('perfectPlaceApp')
 
             }
 
-            if (!marker) {
-
-                alert('Please fill in all the fields.');
-                return;
-
-            }
-
 
             formData.append('title', $scope.listing.title);
             formData.append('phone', $scope.listing.phone);
