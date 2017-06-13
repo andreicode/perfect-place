@@ -66,6 +66,13 @@ angular.module('perfectPlaceApp')
 
                 return _user;
 
+            }, 
+
+            logout: function () {
+
+                _user = undefined;
+                emit();
+
             }
 
         }
